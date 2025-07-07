@@ -13,8 +13,7 @@ func homeGet(w http.ResponseWriter, r *http.Request) {
 func snippetViewGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 
-	msg := fmt.Sprintf("Displaying snippet %s...", id)
-	w.Write([]byte(msg))
+	fmt.Fprintf(w, "Displaying snippet %s", id)
 }
 
 func snippetCreateGet(w http.ResponseWriter, r *http.Request) {
