@@ -17,11 +17,19 @@ func snippetViewGet(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(msg))
 }
 
+func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
+
+	w.Write([]byte("Displaying snippet create form"))
+
+}
+
 func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /{$}", homeGet)
 	mux.HandleFunc("GET /snippet/view/{id}", snippetViewGet)
+	mux.HandleFunc("GET /snippet/create", snippetCreatePost)
 
 	err := http.ListenAndServe(":4000", mux)
 	log.Fatal(err)
