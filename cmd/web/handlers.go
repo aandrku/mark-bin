@@ -2,26 +2,17 @@ package main
 
 import (
 	"fmt"
-	"html/template"
-	"log"
 	"net/http"
+
+	"github.com/aandrku/mark-bin/ui/templ/pages"
 )
 
 func homeGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Server", "Go")
 
-	ts, err := template.ParseFiles("./ui/html/pages/home.tmpl")
-	if err != nil {
-		log.Print(err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
+	page := pages.Home()
 
-	err = ts.Execute(w, nil)
-	if err != nil {
-		log.Print(err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-	}
+	render(w, page)
 }
 
 func snippetViewGet(w http.ResponseWriter, r *http.Request) {
