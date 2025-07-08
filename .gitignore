@@ -8,6 +8,10 @@
 *.so
 *.dylib
 
+# Node stuff
+node_modules
+package-lock.json
+
 # Test binary, built with `go test -c`
 *.test
 
