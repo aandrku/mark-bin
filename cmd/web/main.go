@@ -10,7 +10,10 @@ import (
 
 func main() {
 	addr := flag.String("addr", ":4000", "Usage: -addr=:4000")
+	mode := flag.String("mode", "dev", "Mode of operation: must be 'dev' or 'prod'")
 	flag.Parse()
+
+	_ = mode
 
 	loggerHandler := slog.NewTextHandler(os.Stdout, nil)
 	logger := slog.New(loggerHandler)
