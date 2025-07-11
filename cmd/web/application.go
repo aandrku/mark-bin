@@ -1,3 +1,7 @@
 package main
 
-type application struct{}
+import "log/slog"
+
+type application struct {
+	logger *slog.Logger
+}
