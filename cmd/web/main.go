@@ -15,8 +15,15 @@ func main() {
 
 	_ = mode
 
-	loggerHandler := slog.NewTextHandler(os.Stdout, nil)
-	logger := slog.New(loggerHandler)
+	var logger *slog.Logger
+	switch *mode {
+	case "dev":
+		logger = slog.New(slog.NewTextHandler(os.Stdout, nil))
+	case "prod":
+		logger = slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	default:
+		log.Fatalf("Mode of operation must be 'dev' or 'prod', not %q", *mode)
+	}
 
 	app := application{logger: logger}
 
