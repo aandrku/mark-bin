@@ -13,8 +13,6 @@ func main() {
 	mode := flag.String("mode", "dev", "Mode of operation: must be 'dev' or 'prod'")
 	flag.Parse()
 
-	_ = mode
-
 	var logger *slog.Logger
 	switch *mode {
 	case "dev":
