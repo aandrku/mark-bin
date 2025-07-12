@@ -10,7 +10,9 @@ import (
 func (a *application) homeGet(w http.ResponseWriter, r *http.Request) {
 	page := pages.Home()
 
-	render(w, page)
+	if err := render(w, page); err != nil {
+		a.serverError(w, r, err)
+	}
 }
 
 func (a *application) snippetViewGet(w http.ResponseWriter, r *http.Request) {
