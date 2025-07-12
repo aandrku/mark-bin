@@ -8,8 +8,6 @@ import (
 )
 
 func (a *application) homeGet(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Server", "Go")
-
 	page := pages.Home()
 
 	render(w, page)
