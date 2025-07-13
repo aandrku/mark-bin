@@ -11,6 +11,9 @@ run:
 	@go run ./cmd/web \
 	-addr=${ADDR} \
 	-mode=${MODE}
+
+db/psql:
+	@psql ${MARKBIN_DB_DSN}
 		
 
 live/go:
