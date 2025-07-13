@@ -1,8 +1,8 @@
 package main
 
 import (
-	"errors"
 	"flag"
+	"fmt"
 	"log"
 	"log/slog"
 	"net/http"
@@ -27,7 +27,7 @@ func run() error {
 	case "prod":
 		logger = slog.New(slog.NewJSONHandler(os.Stdout, nil))
 	default:
-		return errors.New("mode of operation must be 'dev' or 'prod'")
+		return fmt.Errorf("mode of operation must be 'dev' or 'prod', not %s", *mode)
 	}
 
 	logger.Info("starting server", "addr", *addr)
