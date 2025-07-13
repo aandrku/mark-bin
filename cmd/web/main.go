@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"log"
 	"log/slog"
@@ -9,6 +10,12 @@ import (
 )
 
 func main() {
+	if err := run(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func run() error {
 	addr := flag.String("addr", ":4000", "Usage: -addr=:4000")
 	mode := flag.String("mode", "dev", "Mode of operation: must be 'dev' or 'prod'")
 	flag.Parse()
@@ -20,13 +27,15 @@ func main() {
 	case "prod":
 		logger = slog.New(slog.NewJSONHandler(os.Stdout, nil))
 	default:
-		log.Fatalf("Mode of operation must be 'dev' or 'prod', not %q", *mode)
+		return errors.New("mode of operation must be 'dev' or 'prod'")
 	}
-
-	app := application{logger: logger}
 
 	logger.Info("starting server", "addr", *addr)
 
-	err := http.ListenAndServe(*addr, app.routes())
-	log.Fatal(err)
+	app := application{logger: logger}
+	if err := http.ListenAndServe(*addr, app.routes()); err != nil {
+		return err
+	}
+
+	return nil
 }
