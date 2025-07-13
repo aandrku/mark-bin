@@ -25,7 +25,8 @@ build/reload:
 run/web:
 	@go run ./cmd/web \
 	-addr=${ADDR} \
-	-mode=${MODE}
+	-mode=${MODE} \
+	-dsn=${MARKBIN_DB_DSN}
 
 ## db/psql: connect to local database using psql
 .PHONY: db/psql
@@ -60,7 +61,7 @@ live/go:
 	--build.include_ext "go" \
 	--build.stop_on_error "false" \
 	--build.cmd "make build/reload" \
-	--build.bin "./tmp/bin/web -addr=${ADDR} -mode=${MODE}" \
+	--build.bin "./tmp/bin/web -addr=${ADDR} -mode=${MODE} -dsn=${MARKBIN_DB_DSN}" \
 	--build.delay "100" \
 	--misc.clean_on_exit true 
 

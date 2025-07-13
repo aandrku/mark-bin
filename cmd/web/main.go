@@ -18,6 +18,7 @@ func main() {
 func run() error {
 	addr := flag.String("addr", ":4000", "Usage: -addr=:4000")
 	mode := flag.String("mode", "dev", "Mode of operation: must be 'dev' or 'prod'")
+	dsn := flag.String("dsn", "", "Usage: -dsn=postgres://<username>:<password>@<ip>/<db-name>")
 	flag.Parse()
 
 	var logger *slog.Logger
@@ -29,6 +30,13 @@ func run() error {
 	default:
 		return fmt.Errorf("mode of operation must be 'dev' or 'prod', not %s", *mode)
 	}
+
+	db, err := openDB(*dsn)
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+	_ = db
 
 	logger.Info("starting server", "addr", *addr)
 
