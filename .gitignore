@@ -12,6 +12,8 @@
 node_modules
 package-lock.json
 
+.sqllsrc.json
+
 # Test binary, built with `go test -c`
 *.test
 
