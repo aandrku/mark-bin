@@ -7,6 +7,8 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+
+	"github.com/aandrku/mark-bin/pkg/models"
 )
 
 func main() {
@@ -40,7 +42,10 @@ func run() error {
 
 	logger.Info("starting server", "addr", *addr)
 
-	app := application{logger: logger}
+	um := &models.UserModel{DB: db}
+	app := application{
+		userModel: um,
+		logger:    logger}
 	if err := http.ListenAndServe(*addr, app.routes()); err != nil {
 		return err
 	}

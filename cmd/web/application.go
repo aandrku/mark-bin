@@ -1,7 +1,12 @@
 package main
 
-import "log/slog"
+import (
+	"log/slog"
+
+	"github.com/aandrku/mark-bin/pkg/models"
+)
 
 type application struct {
-	logger *slog.Logger
+	userModel models.UserModelInterface
+	logger    *slog.Logger
 }
