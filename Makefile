@@ -33,6 +33,10 @@ run/web:
 db/psql:
 	@psql ${MARKBIN_DB_DSN}
 
+## db/psql/test: connect to local testing database using psql
+.PHONY: db/psql/test
+db/psql/test:
+	@psql ${MARKBIN_DB_DSN_TEST}
 
 ## db/migrations/new name=$1: create a new database migration
 .PHONY: db/migrations/new
