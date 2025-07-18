@@ -6,6 +6,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/aandrku/mark-bin/pkg/assert"
 	"github.com/joho/godotenv"
 )
 
@@ -50,15 +51,10 @@ func TestUserModelExists(t *testing.T) {
 
 			model := UserModel{DB: db}
 
-			exists, err := model.Exists(context.Background(), tc.id)
-			if exists != tc.want {
-				t.Errorf("got %t, want %t", exists, tc.want)
+			got, err := model.Exists(context.Background(), tc.id)
 
-			}
-
-			if err != nil {
-				t.Errorf("err is not nil: %v", err)
-			}
+			assert.Equal(t, tc.want, got)
+			assert.NilError(t, err)
 
 			_ = model
 		})
