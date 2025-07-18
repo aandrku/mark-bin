@@ -35,9 +35,32 @@ func openTestDB(t *testing.T) (*sql.DB, error) {
 		return nil, err
 	}
 
+	insertTestData(db)
+
 	t.Cleanup(cleanupTestDB)
 
 	return db, nil
+}
+
+func insertTestData(db *sql.DB) {
+	f, err := os.Open("./testdata/testdata.sql")
+	if err != nil {
+		log.Fatalf("failed to cleanup db: %v", err)
+	}
+
+	buff := new(bytes.Buffer)
+	_, err = io.Copy(buff, f)
+	if err != nil {
+		log.Fatalf("failed to cleanup db: %v", err)
+	}
+
+	stmns := buff.String()
+
+	_, err = db.Exec(stmns)
+	if err != nil {
+		log.Fatalf("failed to cleanup db: %v", err)
+	}
+
 }
 
 func cleanupTestDB() {
