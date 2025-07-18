@@ -1,6 +1,7 @@
 package models
 
 import (
+	"context"
 	"database/sql"
 	"time"
 )
@@ -23,17 +24,18 @@ type UserModel struct {
 	DB *sql.DB
 }
 
-func (u *UserModel) Insert(username, email, password string) error {
+func (u *UserModel) Insert(ctx context.Context, username, email, password string) error {
 
 	return nil
 }
 
-func (u *UserModel) Exists(ID int) (bool, error) {
+// Exists checks if user with given ID exists in a database.
+func (u *UserModel) Exists(ctx context.Context, ID int) (bool, error) {
 
 	return true, nil
 }
 
-func (u *UserModel) Authenticate(email, password string) (int, error) {
+func (u *UserModel) Authenticate(ctx context.Context, email, password string) (int, error) {
 
 	return 1, nil
 }
