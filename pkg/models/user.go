@@ -31,7 +31,15 @@ func (u *UserModel) Insert(ctx context.Context, username, email, password string
 
 // Exists checks if user with given ID exists in a database.
 func (u *UserModel) Exists(ctx context.Context, ID int) (bool, error) {
+	var id int
 
+	row := u.DB.QueryRowContext(ctx, "SELECT id FROM users WHERE id=$1", ID)
+	if err := row.Scan(&id); err != nil {
+		if err == sql.ErrNoRows {
+			return false, nil
+		}
+		return false, err
+	}
 	return true, nil
 }
 
