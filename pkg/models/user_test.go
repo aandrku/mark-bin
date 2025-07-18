@@ -1,6 +1,7 @@
 package models
 
 import (
+	"context"
 	"log"
 	"os"
 	"testing"
@@ -49,7 +50,7 @@ func TestUserModelExists(t *testing.T) {
 
 			model := UserModel{DB: db}
 
-			exists, err := model.Exists(tc.id)
+			exists, err := model.Exists(context.Background(), tc.id)
 			if exists != tc.want {
 				t.Errorf("got %t, want %t", exists, tc.want)
 
