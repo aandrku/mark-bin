@@ -45,20 +45,20 @@ func openTestDB(t *testing.T) (*sql.DB, error) {
 func insertTestData(db *sql.DB) {
 	f, err := os.Open("./testdata/testdata.sql")
 	if err != nil {
-		log.Fatalf("failed to cleanup db: %v", err)
+		log.Fatalf("failed to insert test data into db: %v", err)
 	}
 
 	buff := new(bytes.Buffer)
 	_, err = io.Copy(buff, f)
 	if err != nil {
-		log.Fatalf("failed to cleanup db: %v", err)
+		log.Fatalf("failed to insert test data into db: %v", err)
 	}
 
 	stmns := buff.String()
 
 	_, err = db.Exec(stmns)
 	if err != nil {
-		log.Fatalf("failed to cleanup db: %v", err)
+		log.Fatalf("failed to insert test data into db: %v", err)
 	}
 
 }
