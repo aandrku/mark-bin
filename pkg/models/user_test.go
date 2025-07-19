@@ -60,3 +60,45 @@ func TestUserModelExists(t *testing.T) {
 		})
 	}
 }
+
+func TestUserModelGet(t *testing.T) {
+	tcs := []struct {
+		name string
+		id   int
+		err  error
+		user User
+	}{
+		{
+			name: "Non-existent ID",
+			id:   4612,
+			err:  ErrNoRecord,
+			user: User{},
+		},
+		{
+			name: "Zero ID",
+			id:   0,
+			err:  ErrNoRecord,
+			user: User{},
+		},
+		{
+			name: "Valid ID",
+			id:   1,
+			err:  nil,
+			user: User{},
+		},
+	}
+
+	for _, tc := range tcs {
+		t.Run(tc.name, func(t *testing.T) {
+			db, err := openTestDB(t)
+			assert.NilError(t, err)
+
+			m := UserModel{DB: db}
+
+			u, err := m.Get(tc.id)
+			assert.Equal(tc.user, u)
+			assert.Equal(tc.err, err)
+
+		})
+	}
+}
