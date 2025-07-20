@@ -24,6 +24,23 @@ type UserModel struct {
 	DB *sql.DB
 }
 
+// Get returns user from a database, given users id.
+//
+// If user does not exits, Get will return ErrNoRows error.
+func (u *UserModel) Get(ctx context.Context, id int) (User, error) {
+	var user User
+
+	row := u.DB.QueryRowContext(ctx, "SELECT * FROM users WHERE id=$1", id)
+	err := row.Scan(&user.ID, &user.Username, &user.Email, &user.HashedPassword, &user.Created)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return user, ErrNoRecord
+		}
+		return user, err
+	}
+	return user, nil
+}
+
 func (u *UserModel) Insert(ctx context.Context, username, email, password string) error {
 
 	return nil

@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/aandrku/mark-bin/pkg/assert"
 	"github.com/joho/godotenv"
@@ -19,7 +20,6 @@ func TestMain(m *testing.M) {
 }
 
 func TestUserModelExists(t *testing.T) {
-
 	tcs := []struct {
 		name string
 		id   int
@@ -81,10 +81,32 @@ func TestUserModelGet(t *testing.T) {
 			user: User{},
 		},
 		{
-			name: "Valid ID",
+			name: "Valid ID: alice",
 			id:   1,
 			err:  nil,
-			user: User{},
+			// INSERT INTO users (username, email, hashed_password, created) VALUES
+			// ('alice',   'alice@example.com',   '$2a$12$C6UzMDM.H6dfI/f/IKcEe.EqDkfQ6VVphX1A0rCwbyXU0JvCk4g2e', '2024-09-15 10:30:00');
+			user: User{
+				ID:             1,
+				Username:       "alice",
+				Email:          "alice@example.com",
+				HashedPassword: []byte("$2a$12$C6UzMDM.H6dfI/f/IKcEe.EqDkfQ6VVphX1A0rCwbyXU0JvCk4g2e"),
+				Created:        time.Date(2024, time.September, 15, 10, 30, 0, 0, time.UTC),
+			},
+		},
+		{
+			name: "Valid ID: alice",
+			id:   2,
+			err:  nil,
+			// INSERT INTO users (username, email, hashed_password, created) VALUES
+			// ('bob',     'bob@example.com',     '$2a$10$7EqJtq98hPqEX7fNZaFWoO.J8z6NDF8HiK8l2r3L1GxFz0x0miY3C', '2024-10-01 15:45:00');
+			user: User{
+				ID:             2,
+				Username:       "bob",
+				Email:          "bob@example.com",
+				HashedPassword: []byte("$2a$10$7EqJtq98hPqEX7fNZaFWoO.J8z6NDF8HiK8l2r3L1GxFz0x0miY3C"),
+				Created:        time.Date(2024, time.October, 1, 15, 45, 0, 0, time.UTC),
+			},
 		},
 	}
 
@@ -95,9 +117,9 @@ func TestUserModelGet(t *testing.T) {
 
 			m := UserModel{DB: db}
 
-			u, err := m.Get(tc.id)
-			assert.Equal(tc.user, u)
-			assert.Equal(tc.err, err)
+			u, err := m.Get(context.Background(), tc.id)
+			assert.Equal(t, tc.user, u)
+			assert.Equal(t, tc.err, err)
 
 		})
 	}

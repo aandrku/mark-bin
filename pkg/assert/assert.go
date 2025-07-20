@@ -4,12 +4,13 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 func Equal(t *testing.T, want, got any) {
 	t.Helper()
 
-	if diff := cmp.Diff(want, got); diff != "" {
+	if diff := cmp.Diff(want, got, cmpopts.EquateErrors()); diff != "" {
 		t.Errorf("assertion failed: (-want +got):\n%s", diff)
 	}
 }
