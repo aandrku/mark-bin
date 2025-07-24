@@ -1,0 +1,12 @@
+package pages
+
+import "github.com/aandrku/mark-bin/pkg/models"
+
+templ SnippetView(snippet models.Snippet) {
+	<div>{ snippet.ID }</div>
+	<div>{ snippet.Title }</div>
+	<div>{ snippet.Content }</div>
+	<div>{ snippet.UserID }</div>
+	<div>{ snippet.Created.Format("MONTH YEAR") }</div>
+	<div>{ snippet.Updated.Format("MONTH YEAR") }</div>
+}

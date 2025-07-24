@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/aandrku/mark-bin/ui/templ/pages"
 )
@@ -17,8 +18,23 @@ func (a *application) homeGet(w http.ResponseWriter, r *http.Request) {
 
 func (a *application) snippetViewGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
+	ctx := r.Context()
 
-	fmt.Fprintf(w, "Displaying snippet %s", id)
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprintf(w, "error getting this snipet %v", err)
+	}
+
+	s, err := a.snippetModel.Get(ctx, idInt)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprintf(w, "error getting this snipet %v", err)
+	}
+
+	page := pages.SnippetView(s)
+	render(w, page)
+
 }
 
 func (a *application) snippetCreateGet(w http.ResponseWriter, r *http.Request) {

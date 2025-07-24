@@ -43,9 +43,11 @@ func run() error {
 	logger.Info("starting server", "addr", *addr)
 
 	um := &models.UserModel{DB: db}
+	sm := &models.SnippetModel{DB: db}
 	app := application{
-		userModel: um,
-		logger:    logger}
+		userModel:    um,
+		snippetModel: sm,
+		logger:       logger}
 	if err := http.ListenAndServe(*addr, app.routes()); err != nil {
 		return err
 	}

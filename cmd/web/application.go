@@ -7,6 +7,7 @@ import (
 )
 
 type application struct {
-	userModel models.UserModelInterface
-	logger    *slog.Logger
+	snippetModel *models.SnippetModel
+	userModel    models.UserModelInterface
+	logger       *slog.Logger
 }

@@ -15,9 +15,9 @@ type User struct {
 }
 
 type UserModelInterface interface {
-	Insert(username, email, password string) error
-	Exists(ID int) (bool, error)
-	Authenticate(email, password string) (int, error)
+	Insert(ctx context.Context, username, email, password string) error
+	Exists(ctx context.Context, ID int) (bool, error)
+	Authenticate(ctx context.Context, email, password string) (int, error)
 }
 
 type UserModel struct {

@@ -1,21 +1,9 @@
 package pages
 
+import "github.com/aandrku/mark-bin/ui/templ/layout"
+
 templ Home() {
-	<html lang="en">
-		<head>
-			<meta charset="utf-8"/>
-			<title>Home - MarkBin</title>
-			<link href="/static/css/styles.css" rel="stylesheet"/>
-		</head>
-		<body>
-			<header>
-				<h1 class=""><a href="/">Snippetbox</a></h1>
-			</header>
-			<main>
-				<h2>Latest Snippets</h2>
-				<p>There's nothing to see here yet!</p>
-			</main>
-			<footer>Powered by <a href="https://golang.org/">Go</a></footer>
-		</body>
-	</html>
+	@layout.Base() {
+		<div class="text-blue-600">There is nothing to see here yet</div>
+	}
 }
