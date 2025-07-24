@@ -10,7 +10,7 @@ import (
 func Equal(t *testing.T, want, got any) {
 	t.Helper()
 
-	if diff := cmp.Diff(want, got, cmpopts.EquateErrors()); diff != "" {
+	if diff := cmp.Diff(want, got, cmpopts.EquateErrors(), cmpopts.EquateComparable()); diff != "" {
 		t.Errorf("assertion failed: (-want +got):\n%s", diff)
 	}
 }
