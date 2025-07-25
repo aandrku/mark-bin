@@ -1,12 +1,23 @@
 package pages
 
-import "github.com/aandrku/mark-bin/pkg/models"
+import (
+	"github.com/aandrku/mark-bin/pkg/models"
+	"github.com/aandrku/mark-bin/ui/templ/layout"
+	"time"
+)
 
 templ SnippetView(snippet models.Snippet) {
-	<div>{ snippet.ID }</div>
-	<div>{ snippet.Title }</div>
-	<div>{ snippet.Content }</div>
-	<div>{ snippet.UserID }</div>
-	<div>{ snippet.Created.Format("MONTH YEAR") }</div>
-	<div>{ snippet.Updated.Format("MONTH YEAR") }</div>
+	@layout.Base() {
+		<div class="font-bold text-lg w-full pl-4 p-2">Posted by <span class="text-lime-800">someone</span></div>
+		<div class="flex flex-col rounded-lg text-xl border overflow-clip  border-neutral-600 w-full ">
+			<div
+				class="text-neutral-400 bg-neutral-900 flex items-center justify-between outline-none pl-2 pr-2 w-full h-12"
+			>
+				<div>{ snippet.Title }</div>
+				<div class="text-sm italic">Last updated on { snippet.Updated.Format(time.DateOnly) }</div>
+			</div>
+			@separator("horizontal")
+			<div id="content" placeholder="markdown snippet here" class="text-neutral-400  p-2 w-full outline-none  resize-none">{ snippet.Content }</div>
+		</div>
+	}
 }
