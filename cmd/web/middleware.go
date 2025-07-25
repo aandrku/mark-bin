@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 func (a application) recoverPanic(next http.Handler) http.Handler {
@@ -22,8 +23,14 @@ func (a application) recoverPanic(next http.Handler) http.Handler {
 }
 
 func commonHeaders(next http.Handler) http.Handler {
+	cspHeaders := []string{
+		"default-src 'self';",
+		"font-src 'self' https://fonts.gstatic.com;",
+		"style-src 'self' https://fonts.googleapis.com;",
+	}
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Security-Policy", "default-src 'self';")
+		w.Header().Add("Content-Security-Policy", strings.Join(cspHeaders, ""))
 		w.Header().Set("Referer-Policy", "cross-when-cross-origin")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		w.Header().Set("X-Frame-Options", "deny")
