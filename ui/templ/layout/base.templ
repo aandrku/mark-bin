@@ -1,5 +1,7 @@
 package layout
 
+import "github.com/aandrku/mark-bin/ui/templ/components"
+
 templ Base() {
 	<html lang="en" class="bg-neutral-950 text-neutral-400 ">
 		<head>
@@ -10,8 +12,13 @@ templ Base() {
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 			<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"/>
 		</head>
-		<body class="h-[100dvh] w-[100dvw] font-[Source_Code_Pro] font-medium">
-			{ children... }
+		<body class="flex justify-center h-[100dvh] w-[100dvw]  font-[Source_Code_Pro] font-medium">
+			<div id="root" class="w-6xl">
+				@components.Topbar()
+				<div class=" w-full h-full flex justify-center">
+					{ children... }
+				</div>
+			</div>
 		</body>
 	</html>
 }

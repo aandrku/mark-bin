@@ -43,7 +43,7 @@ func SnippetCreate() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-full flex justify-center\"><div class=\"h-full w-5xl \"><div class=\" flex flex-row items-center pt-4 pl-6 pr-6 justify-between  h-20\"><div class=\" text-4xl\"><span>markbin</span><span class=\"text-lime-800\">.app</span></div><div class=\"font-bold\"><button class=\"p-2 border border-neutral-600\n\t\t\t\t\t\t\trounded-lg hover:bg-neutral-900 active:bg-neutral-900 active:scale-95 bg-neutral-800\">snippets </button> <button class=\"p-2 border border-lime-700 text-lime-200\n\t\t\t\t\t\t\trounded-lg hover:bg-lime-950 active:bg-lime-950 active:scale-95 bg-lime-900\">login</button></div></div><div class=\"p-8 h-4/5\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"h-full w-full \"><div class=\"p-8 h-4/5\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -51,7 +51,7 @@ func SnippetCreate() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
