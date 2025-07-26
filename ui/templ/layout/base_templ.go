@@ -31,7 +31,7 @@ func Base() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<html lang=\"en\" class=\"bg-neutral-950 text-neutral-400 \"><head><meta charset=\"utf-8\"><title>Home - MarkBin</title><link href=\"/static/css/styles.css\" rel=\"stylesheet\"><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap\" rel=\"stylesheet\"></head><body class=\"flex justify-center h-[100dvh] w-[100dvw]  font-[Source_Code_Pro] font-medium\"><div id=\"root\" class=\"w-full sm:w-6xl\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\" class=\"bg-neutral-950 text-neutral-400 \"><head><meta charset=\"utf-8\"><title>Home - MarkBin</title><link href=\"/static/css/styles.css\" rel=\"stylesheet\"><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap\" rel=\"stylesheet\"></head><body class=\"flex justify-center h-[100dvh] w-[100dvw]  font-[Source_Code_Pro] font-medium\"><div id=\"root\" class=\"w-full sm:w-6xl\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

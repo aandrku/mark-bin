@@ -6,10 +6,10 @@ import (
 	"time"
 )
 
-templ SnippetView(snippet models.Snippet) {
+templ SnippetView(snippet models.SnippetWithUsername) {
 	@layout.Base() {
-		<div class="font-bold text-lg w-full pl-4 p-2">Posted by <span class="text-lime-800">someone</span></div>
-		<div class="flex flex-col rounded-lg text-xl border overflow-clip  border-neutral-600 w-full ">
+		<div class="font-bold text-lg w-full pl-4 p-2">Posted by <span class="text-lime-800">{ snippet.Username }</span></div>
+		<div class="flex  flex-col rounded-lg text-xl border overflow-clip  border-neutral-600 w-full ">
 			<div
 				class="text-neutral-400 bg-neutral-900 flex items-center justify-between outline-none pl-2 pr-2 w-full h-12"
 			>

@@ -56,6 +56,54 @@ func TestSnippetModelGet(t *testing.T) {
 	}
 }
 
+func TestSnippetModelGetWithUsername(t *testing.T) {
+	tcs := []struct {
+		name                string
+		id                  int
+		snippetWithUsername SnippetWithUsername
+		err                 error
+	}{
+		{
+			name:                "Zero ID",
+			id:                  0,
+			snippetWithUsername: SnippetWithUsername{},
+			err:                 ErrNoRecord,
+		},
+		{
+			name:                "Non-existent ID",
+			id:                  45,
+			snippetWithUsername: SnippetWithUsername{},
+			err:                 ErrNoRecord,
+		},
+		{
+			name: "Valid ID",
+			id:   1,
+			snippetWithUsername: SnippetWithUsername{
+				ID:       1,
+				Title:    "Morning Light",
+				Content:  `Golden sun rises\nShadows stretch across the field\nDay begins anew`,
+				Created:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
+				Updated:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
+				Username: "alice",
+			},
+			err: nil,
+		},
+	}
+
+	for _, tc := range tcs {
+		t.Run(tc.name, func(t *testing.T) {
+			db, err := openTestDB(t)
+			assert.NilError(t, err)
+
+			m := SnippetModel{DB: db}
+
+			s, err := m.GetWithUsername(context.Background(), tc.id)
+			assert.Equal(t, tc.snippetWithUsername, s)
+			assert.Equal(t, tc.err, err)
+		})
+	}
+}
+
 func TestSnippetModelInsert(t *testing.T) {
 
 }

@@ -26,7 +26,7 @@ func (a *application) snippetViewGet(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "error getting this snipet %v", err)
 	}
 
-	s, err := a.snippetModel.Get(ctx, idInt)
+	s, err := a.snippetModel.GetWithUsername(ctx, idInt)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintf(w, "error getting this snipet %v", err)
