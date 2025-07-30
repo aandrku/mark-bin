@@ -10,6 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"github.com/aandrku/mark-bin/pkg/models"
+	"github.com/aandrku/mark-bin/ui/templ/components"
 	"github.com/aandrku/mark-bin/ui/templ/layout"
 	"time"
 )
@@ -54,7 +55,7 @@ func SnippetView(snippet models.SnippetWithUsername) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(snippet.Username)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/templ/pages/snippet.view.templ`, Line: 11, Col: 105}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/templ/pages/snippet.view.templ`, Line: 12, Col: 105}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -67,7 +68,7 @@ func SnippetView(snippet models.SnippetWithUsername) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(snippet.Title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/templ/pages/snippet.view.templ`, Line: 20, Col: 25}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/templ/pages/snippet.view.templ`, Line: 21, Col: 25}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -80,7 +81,7 @@ func SnippetView(snippet models.SnippetWithUsername) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(snippet.Updated.Format(time.DateOnly))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/templ/pages/snippet.view.templ`, Line: 21, Col: 88}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/templ/pages/snippet.view.templ`, Line: 22, Col: 88}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -90,7 +91,7 @@ func SnippetView(snippet models.SnippetWithUsername) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = separator("horizontal").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = components.Separator("horizontal").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -101,7 +102,7 @@ func SnippetView(snippet models.SnippetWithUsername) templ.Component {
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(snippet.Content)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/templ/pages/snippet.view.templ`, Line: 24, Col: 138}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/templ/pages/snippet.view.templ`, Line: 25, Col: 138}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 			if templ_7745c5c3_Err != nil {

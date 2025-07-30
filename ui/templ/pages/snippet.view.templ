@@ -2,6 +2,7 @@ package pages
 
 import (
 	"github.com/aandrku/mark-bin/pkg/models"
+	"github.com/aandrku/mark-bin/ui/templ/components"
 	"github.com/aandrku/mark-bin/ui/templ/layout"
 	"time"
 )
@@ -20,7 +21,7 @@ templ SnippetView(snippet models.SnippetWithUsername) {
 					<div>{ snippet.Title }</div>
 					<div class="text-sm italic">Last updated on { snippet.Updated.Format(time.DateOnly) }</div>
 				</div>
-				@separator("horizontal")
+				@components.Separator("horizontal")
 				<div id="content" placeholder="markdown snippet here" class="text-neutral-400  p-2 w-full outline-none  resize-none">{ snippet.Content }</div>
 			</div>
 		</div>

@@ -1,0 +1,10 @@
+package components
+
+templ Separator(kind string) {
+	switch kind {
+		case "horizontal":
+			<div class="bg-neutral-600 h-px w-full"></div>
+		case "vertical":
+			<div class="bg-neutral-600 w-px h-full"></div>
+	}
+}
