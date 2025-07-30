@@ -1,9 +1,38 @@
 package pages
 
 import "github.com/aandrku/mark-bin/ui/templ/layout"
+import "github.com/aandrku/mark-bin/pkg/models"
+import "github.com/aandrku/mark-bin/ui/templ/components"
+import "strconv"
+import "time"
 
-templ Home() {
+templ Home(snippets []models.SnippetWithUsername) {
 	@layout.Base() {
-		<div class="text-blue-600">There is nothing to see here yet</div>
+		<div class="pt-10 pl-4 pr-4 w-full flex justify-center">
+			<div
+				class="flex flex-col rounded-lg text-md border overflow-clip
+				border-neutral-600 w-2xl "
+			>
+				for i, s := range snippets {
+					<a
+						href={ "snippet/view/" + strconv.Itoa(s.ID) }
+						class="flex justify-between active:bg-neutral-800 hover:bg-neutral-800
+						p-4"
+					>
+						<div>{ s.Title }</div>
+						<div class="text-xs">
+							<div class="">
+								Posted by 
+								<span class="text-lime-800">{ s.Username }</span>
+							</div>
+							<div class="italic text-neutral-700">On { s.Updated.Format(time.DateOnly) }</div>
+						</div>
+					</a>
+					if i != len(snippets) {
+						@components.Separator("horizontal")
+					}
+				}
+			</div>
+		</div>
 	}
 }

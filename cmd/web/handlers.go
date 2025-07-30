@@ -9,7 +9,14 @@ import (
 )
 
 func (a *application) homeGet(w http.ResponseWriter, r *http.Request) {
-	page := pages.Home()
+	ctx := r.Context()
+
+	snippets, err := a.snippetModel.Latest(ctx, 10)
+	if err != nil {
+		a.serverError(w, r, err)
+	}
+
+	page := pages.Home(snippets)
 
 	if err := render(w, page); err != nil {
 		a.serverError(w, r, err)

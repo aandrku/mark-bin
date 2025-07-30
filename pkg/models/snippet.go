@@ -96,7 +96,38 @@ func (m *SnippetModel) Delete(ctx context.Context, id int) error {
 }
 
 // Latest returns n latest snippets from db.
-func (m *SnippetModel) Latest(ctx context.Context, n int) ([]Snippet, error) {
+func (m *SnippetModel) Latest(ctx context.Context, n int) ([]SnippetWithUsername, error) {
+	ss := make([]SnippetWithUsername, 0)
 
-	return nil, nil
+	s1 := SnippetWithUsername{
+		ID:       1,
+		Title:    "Morning Light",
+		Content:  `Golden sun rises\nShadows stretch across the field\nDay begins anew`,
+		Created:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
+		Updated:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
+		Username: "alice",
+	}
+
+	s2 := SnippetWithUsername{
+		ID:       1,
+		Title:    "Morning Light",
+		Content:  `Golden sun rises\nShadows stretch across the field\nDay begins anew`,
+		Created:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
+		Updated:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
+		Username: "alice",
+	}
+	s3 := SnippetWithUsername{
+		ID:       1,
+		Title:    "Morning Light",
+		Content:  `Golden sun rises\nShadows stretch across the field\nDay begins anew`,
+		Created:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
+		Updated:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
+		Username: "alice",
+	}
+
+	ss = append(ss, s1)
+	ss = append(ss, s2)
+	ss = append(ss, s3)
+
+	return ss, nil
 }
