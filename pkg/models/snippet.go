@@ -95,39 +95,37 @@ func (m *SnippetModel) Delete(ctx context.Context, id int) error {
 	return nil
 }
 
-// Latest returns n latest snippets from db.
+// Latest returns n latest snippets with username of their author from db.
 func (m *SnippetModel) Latest(ctx context.Context, n int) ([]SnippetWithUsername, error) {
-	ss := make([]SnippetWithUsername, 0)
+	ss := make([]SnippetWithUsername, 0, n)
 
-	s1 := SnippetWithUsername{
-		ID:       1,
-		Title:    "Morning Light",
-		Content:  `Golden sun rises\nShadows stretch across the field\nDay begins anew`,
-		Created:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
-		Updated:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
-		Username: "alice",
-	}
+	q := `
+	SELECT s.id, s.title, s.content, s.created, s.updated, u.username
+	FROM snippets s JOIN users u
+	ON s.user_id=u.id
+	ORDER BY created DESC
+	LIMIT $1
+	`
 
-	s2 := SnippetWithUsername{
-		ID:       1,
-		Title:    "Morning Light",
-		Content:  `Golden sun rises\nShadows stretch across the field\nDay begins anew`,
-		Created:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
-		Updated:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
-		Username: "alice",
+	rows, err := m.DB.QueryContext(ctx, q, n)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return ss, ErrNoRecord
+		}
+		return ss, err
 	}
-	s3 := SnippetWithUsername{
-		ID:       1,
-		Title:    "Morning Light",
-		Content:  `Golden sun rises\nShadows stretch across the field\nDay begins anew`,
-		Created:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
-		Updated:  time.Date(2024, time.January, 1, 8, 0, 0, 0, time.UTC),
-		Username: "alice",
-	}
+	defer rows.Close()
 
-	ss = append(ss, s1)
-	ss = append(ss, s2)
-	ss = append(ss, s3)
+	for rows.Next() {
+		var s SnippetWithUsername
+
+		err := rows.Scan(&s.ID, &s.Title, &s.Content, &s.Created, &s.Updated, &s.Username)
+		if err != nil {
+			return ss, err
+		}
+
+		ss = append(ss, s)
+	}
 
 	return ss, nil
 }

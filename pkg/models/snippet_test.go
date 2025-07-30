@@ -162,5 +162,13 @@ func TestSnippetModelDelete(t *testing.T) {
 }
 
 func TestSnippetModelLatest(t *testing.T) {
+	db, err := openTestDB(t)
+	assert.NilError(t, err)
+
+	m := SnippetModel{DB: db}
+
+	ss, err := m.Latest(context.Background(), 10)
+	_ = ss
+	assert.NilError(t, err)
 
 }
