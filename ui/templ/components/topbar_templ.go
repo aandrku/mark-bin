@@ -29,7 +29,7 @@ func Topbar() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full flex flex-row items-center pt-4 pl-6 pr-6 justify-between  h-20\"><div class=\" text-4xl\"><span>markbin</span><span class=\"text-lime-800\">.app</span></div><div class=\"font-bold\"><button class=\"p-2 border border-neutral-600\n\t\t\t\t\t\t\trounded-lg hover:bg-neutral-900 active:bg-neutral-900 active:scale-95 bg-neutral-800\">snippets </button> <button class=\"p-2 border border-lime-700 text-lime-200\n\t\t\t\t\t\t\trounded-lg hover:bg-lime-950 active:bg-lime-950 active:scale-95 bg-lime-900\">login</button></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full flex flex-row items-center pt-4 pl-6 pr-6 justify-between  h-20\"><div class=\" text-4xl\"><span>markbin</span><span class=\"text-lime-800\">.app</span></div><div class=\"font-bold\"><button class=\"p-2 pl-4 pr-4   border border-neutral-600\n\t\t\t\t\t\t\trounded-lg hover:bg-neutral-900 active:bg-neutral-900 active:scale-95 bg-neutral-800\">+ </button> <button class=\"p-2 border border-neutral-600\n\t\t\t\t\t\t\trounded-lg hover:bg-neutral-900 active:bg-neutral-900 active:scale-95 bg-neutral-800\">snippets </button> <button class=\"p-2 border border-lime-700 text-lime-200\n\t\t\t\t\t\t\trounded-lg hover:bg-lime-950 active:bg-lime-950 active:scale-95 bg-lime-900\">login</button></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
