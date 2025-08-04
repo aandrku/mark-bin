@@ -55,3 +55,25 @@ func (a *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) 
 
 	w.Write([]byte("Created new snippet"))
 }
+
+// loginGet shows login form to the user.
+func (a *application) loginGet(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Show login form...\n")
+}
+
+// loginPost logs the user in.
+func (a *application) loginPost(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Log user in \n")
+
+}
+
+// signupGet shows sign up form to the user.
+func (a *application) signupGet(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Show signup form")
+
+}
+
+// signupPost registers new user.
+func (a *application) signupPost(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Register new user")
+}
