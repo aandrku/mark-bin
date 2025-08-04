@@ -1,0 +1,29 @@
+package pages
+
+import (
+	"github.com/aandrku/mark-bin/pkg/models"
+	"github.com/aandrku/mark-bin/ui/templ/components"
+	"github.com/aandrku/mark-bin/ui/templ/layout"
+	"time"
+)
+
+templ SnippetView(snippet models.SnippetWithUsername) {
+	@layout.Base() {
+		<div class="font-bold text-lg w-full pl-4 p-2">Posted by <span class="text-lime-800">{ snippet.Username }</span></div>
+		<div class="pl-4 pr-4">
+			<div
+				class="flex flex-col rounded-lg text-xl border overflow-clip
+				border-neutral-600 w-full "
+			>
+				<div
+					class="text-neutral-400 bg-neutral-900 flex items-center justify-between outline-none pl-2 pr-2 w-full h-12"
+				>
+					<div>{ snippet.Title }</div>
+					<div class="text-sm italic">Last updated on { snippet.Updated.Format(time.DateOnly) }</div>
+				</div>
+				@components.Separator("horizontal")
+				<div id="content" placeholder="markdown snippet here" class="text-neutral-400  p-2 w-full outline-none  resize-none">{ snippet.Content }</div>
+			</div>
+		</div>
+	}
+}
