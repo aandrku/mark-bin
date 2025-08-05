@@ -1,6 +1,10 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/justinas/alice"
+)
 
 func (a *application) routes() http.Handler {
 	mux := http.NewServeMux()
@@ -18,5 +22,7 @@ func (a *application) routes() http.Handler {
 	mux.HandleFunc("GET /signup", a.signupGet)
 	mux.HandleFunc("POST /signup", a.signupPost)
 
-	return a.recoverPanic(a.logRequest(commonHeaders(mux)))
+	chain := alice.New(a.recoverPanic, a.logRequest, commonHeaders)
+
+	return a.recoverPanic(chain.Then(mux))
 }
