@@ -29,14 +29,16 @@ func (a *application) snippetViewGet(w http.ResponseWriter, r *http.Request) {
 
 	idInt, err := strconv.Atoi(id)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, "error getting this snipet %v", err)
+		a.clientError(w, http.StatusBadRequest)
+		a.logger.Error("Bad request")
+		return
 	}
 
 	s, err := a.snippetModel.GetWithUsername(ctx, idInt)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, "error getting this snipet %v", err)
+		a.clientError(w, http.StatusBadRequest)
+		a.logger.Error("Bad request")
+		return
 	}
 
 	page := pages.SnippetView(s)
