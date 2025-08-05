@@ -13,9 +13,9 @@ func (a *application) routes() http.Handler {
 	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
 
 	mux.HandleFunc("GET /{$}", a.homeGet)
-	mux.HandleFunc("GET /snippet/view/{id}", a.snippetViewGet)
-	mux.HandleFunc("GET /snippet/create", a.snippetCreateGet)
-	mux.HandleFunc("POST /snippet/create", a.snippetCreatePost)
+	mux.HandleFunc("GET /snippets/views/{id}", a.snippetsViewsGet)
+	mux.HandleFunc("GET /snippets/create", a.snippetsCreateGet)
+	mux.HandleFunc("POST /snippets", a.snippetsPost)
 
 	mux.HandleFunc("GET /login", a.loginGet)
 	mux.HandleFunc("POST /login", a.loginPost)

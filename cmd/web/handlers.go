@@ -23,7 +23,7 @@ func (a *application) homeGet(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (a *application) snippetViewGet(w http.ResponseWriter, r *http.Request) {
+func (a *application) snippetsViewsGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	ctx := r.Context()
 
@@ -46,13 +46,13 @@ func (a *application) snippetViewGet(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (a *application) snippetCreateGet(w http.ResponseWriter, r *http.Request) {
+func (a *application) snippetsCreateGet(w http.ResponseWriter, r *http.Request) {
 	page := pages.SnippetCreate()
 
 	render(w, page)
 }
 
-func (a *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+func (a *application) snippetsPost(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 
 	w.Write([]byte("Created new snippet"))
