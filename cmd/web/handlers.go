@@ -23,20 +23,22 @@ func (a *application) homeGet(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (a *application) snippetViewGet(w http.ResponseWriter, r *http.Request) {
+func (a *application) snippetsViewsGet(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	ctx := r.Context()
 
 	idInt, err := strconv.Atoi(id)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, "error getting this snipet %v", err)
+		a.clientError(w, http.StatusBadRequest)
+		a.logger.Error("Bad request")
+		return
 	}
 
 	s, err := a.snippetModel.GetWithUsername(ctx, idInt)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, "error getting this snipet %v", err)
+		a.clientError(w, http.StatusBadRequest)
+		a.logger.Error("Bad request")
+		return
 	}
 
 	page := pages.SnippetView(s)
@@ -44,13 +46,13 @@ func (a *application) snippetViewGet(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (a *application) snippetCreateGet(w http.ResponseWriter, r *http.Request) {
+func (a *application) snippetsCreateGet(w http.ResponseWriter, r *http.Request) {
 	page := pages.SnippetCreate()
 
 	render(w, page)
 }
 
-func (a *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+func (a *application) snippetsPost(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 
 	w.Write([]byte("Created new snippet"))
@@ -58,7 +60,9 @@ func (a *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) 
 
 // loginGet shows login form to the user.
 func (a *application) loginGet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Show login form...\n")
+	page := pages.Login()
+
+	render(w, page)
 }
 
 // loginPost logs the user in.
@@ -69,8 +73,9 @@ func (a *application) loginPost(w http.ResponseWriter, r *http.Request) {
 
 // signupGet shows sign up form to the user.
 func (a *application) signupGet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Show signup form")
+	page := pages.Signup()
 
+	render(w, page)
 }
 
 // signupPost registers new user.
