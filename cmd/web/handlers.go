@@ -60,7 +60,9 @@ func (a *application) snippetsPost(w http.ResponseWriter, r *http.Request) {
 
 // loginGet shows login form to the user.
 func (a *application) loginGet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Show login form...\n")
+	page := pages.Login()
+
+	render(w, page)
 }
 
 // loginPost logs the user in.
@@ -71,8 +73,9 @@ func (a *application) loginPost(w http.ResponseWriter, r *http.Request) {
 
 // signupGet shows sign up form to the user.
 func (a *application) signupGet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Show signup form")
+	page := pages.Signup()
 
+	render(w, page)
 }
 
 // signupPost registers new user.
