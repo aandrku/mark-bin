@@ -22,7 +22,7 @@ func (a *application) routes() http.Handler {
 	mux.HandleFunc("GET /signup", a.signupGet)
 	mux.HandleFunc("POST /signup", a.signupPost)
 
-	chain := alice.New(a.recoverPanic, a.logRequest, commonHeaders)
+	chain := alice.New(authenticate, a.recoverPanic, a.logRequest, commonHeaders)
 
 	return a.recoverPanic(chain.Then(mux))
 }

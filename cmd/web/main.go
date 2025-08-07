@@ -21,6 +21,7 @@ func run() error {
 	addr := flag.String("addr", ":4000", "Usage: -addr=:4000")
 	mode := flag.String("mode", "dev", "Mode of operation: must be 'dev' or 'prod'")
 	dsn := flag.String("dsn", "", "Usage: -dsn=postgres://<username>:<password>@<ip>/<db-name>")
+	_ = flag.String("jwtkey", "", "Usage: -jwtkey=<secret-key>")
 	flag.Parse()
 
 	var logger *slog.Logger
